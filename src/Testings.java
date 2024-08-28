@@ -13,22 +13,23 @@ public class Testings {
 	Statement stmt;
 	ResultSet rs;
 	Random rand = new Random();
-	int customernumber = rand .nextInt(10000);
+	Random rand2 = new Random();
+	
 @BeforeTest
 public void start() throws SQLException {
 	conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/classicmodels","root","hussein1997@");
 	
 }
-@Test (priority = 1  )
+@Test (priority = 1  , invocationCount = 5 )
 public void Add() throws SQLException {
-	
+	int customernumber = rand .nextInt(100)*rand2.nextInt(100);
 	String query = "insert into customers (customerNumber,customerName,contactLastName,contactFirstName,phone,addressLine1,addressLine2,city,state,postalCode,country,salesRepEmployeeNumber,creditLimit) VALUES ( "+customernumber+", 'john', 'mike', 'Michael', '212-555-1234', '123 Main Street', 'Suite 200', 'New York', 'NY', '10001', 'USA', 1621, 50000.00)";
 	stmt=conn.createStatement();
 	stmt.executeUpdate(query);
 }
 @Test(priority = 2 )
 public void Update () throws SQLException {
-	String query = "update customers set contactFirstName = 'hussein' where phone= '212-555-1234'";
+	String query = "update customers set contactFirstName = 'hussein' where customerNumber= 4175";
 	stmt=conn.createStatement();
 	stmt.executeUpdate(query);
 }
@@ -36,7 +37,7 @@ public void Update () throws SQLException {
 public void git_data() throws SQLException {
 	String Fname;
 	String Lname;
-	String query = "select * from customers where customerNumber = 684";
+	String query = "select * from customers where customerNumber = 4175";
 	stmt=conn.createStatement();
 	rs=stmt.executeQuery(query);
 	while(rs.next()) {
@@ -46,9 +47,9 @@ public void git_data() throws SQLException {
 	System.out.println(Lname);
 }
 }
-@Test(priority = 4)
+@Test(priority = 4 , enabled = false)
 public void Delete() throws SQLException {
-	String query = "delete from customers where customerNumber = 684";
+	String query = "delete from customers where customerNumber = 4175";
 	stmt=conn.createStatement();
 	stmt.executeUpdate(query);
 	

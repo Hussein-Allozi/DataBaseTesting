@@ -6,7 +6,7 @@
       <class name="Testings">
         <methods>
           <include name="start"/>
-          <include name="Delete"/>
+          <include name="Add"/>
         </methods>
       </class> <!-- Testings -->
     </classes>
